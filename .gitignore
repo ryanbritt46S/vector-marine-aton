@@ -1,0 +1,23 @@
+# built data (rebuild with the pipeline; the published copy is in R2)
+build/
+# local tools
+.venv/
+.local-logs/
+node_modules/
+worker/.wrangler/
+worker/.dev.vars
+__pycache__/
+.pytest_cache/
+# credentials: never in git
+*.credentials
+.env
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+pubspec.lock
+flutter/vm_aton/build/
+flutter/vm_aton/example/build/
+flutter/vm_aton/example/ios/
+flutter/vm_aton/example/android/
+flutter/vm_aton/example/test/

@@ -1,0 +1,55 @@
+# The daily Buoys & lights job: the Coast Guard's Light List (districts 1, 5, 7) and the current discrepancies
+# and temporary changes from the Local Notice to Mariners (NAVCEN, public, no key) -> vector tiles, symbols,
+# style and meta in the vm-aton R2 bucket, which the vm-aton Worker serves to the app. About a minute.
+#
+# Repository secrets (Settings -> Secrets and variables -> Actions), see docs/SETUP.md:
+#   R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY  R2 token with Object Read & Write on vm-aton only
+# Run it by hand: Actions -> buoys-and-lights -> Run workflow. A failed run emails whoever last edited this file.
+name: buoys-and-lights
+on:
+  schedule:
+    - cron: "20 10 * * *"          # 6:20 AM New York (summer): NAVCEN posts the day's notices overnight
+  workflow_dispatch:
+concurrency:
+  group: buoys-and-lights
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: pipeline/requirements.txt
+      - run: pip install -r pipeline/requirements.txt
+      # Downloads the files (~15 MB), reads the last published meta.json from R2 (a district with far fewer aids
+      # than that stops the run: exit 3, nothing published), writes build/site.
+      - name: Build
+        run: python3 pipeline/run_aton.py --out build/site
+      - name: Publish to R2
+        run: python3 pipeline/publish.py --src build/site
+      - name: Summary
+        if: always()
+        run: |
+          if [ -f build/site/meta.json ]; then
+            python3 - >> "$GITHUB_STEP_SUMMARY" <<'PY'
+          import json
+          m = json.load(open("build/site/meta.json"))
+          c, n = m["counts"], m["counts"]["notices"]
+          print(f"run {m['run']}: {c['aids']} aids, data of {m['data_date']}; tiles {m['tiles']['bytes'] / 1e6:.1f} MB, version {m['tiles']['version']}\n")
+          print("| District | Aids | Light List parts |\n|---|---|---|")
+          for d, v in m["districts"].items():
+              print(f"| {d} | {v['aids']} | {v['light_list_parts']} |")
+          print(f"\nNotices in these districts: {n['in_area']} ({n['matched_by_number']} matched by number, "
+                f"{n['matched_by_name']} by name, {n['unmatched']} shown at their own position). "
+                f"Status: {c['by_status']}.")
+          PY
+          fi
+          if [ -f build/site/meta.rejected.json ]; then echo "REFUSED: see the Build step's log" >> "$GITHUB_STEP_SUMMARY"; fi

@@ -1,0 +1,21 @@
+name: vm_aton
+description: Buoys & lights for the Vector Marine map's Overlays menu - every US Coast Guard aid to navigation, Maine to Florida and Puerto Rico, with the Local Notice to Mariners' outages.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.0
+  # The app's map. Same range as the other overlay packages (vm_surveys, vm_traffic): 0.20 renamed
+  # MaplibreMapController to MapLibreMapController, which this package uses. Not compiled yet (WP1).
+  maplibre_gl: ">=0.20.0 <0.28.0"
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0

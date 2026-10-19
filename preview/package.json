@@ -1,0 +1,16 @@
+{
+  "name": "vm-aton-preview",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node serve.mjs",
+    "test": "node --test test/*.test.mjs",
+    "shots": "node shots.mjs"
+  },
+  "dependencies": {
+    "maplibre-gl": "^4.7.1"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.56.1"
+  }
+}

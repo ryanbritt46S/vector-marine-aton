@@ -1,0 +1,17 @@
+{
+  "name": "vm-aton",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "dev": "bash dev_local.sh",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "dependencies": {
+    "pmtiles": "^4.3.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.114.0"
+  }
+}

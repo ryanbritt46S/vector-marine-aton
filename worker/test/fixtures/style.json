@@ -1,0 +1,188 @@
+{
+ "version": 1,
+ "id": "vm-aton",
+ "name": "Buoys & lights",
+ "anchor": "vm-overlays",
+ "tiles_version": "19501a87fa48",
+ "icons_version": "c57dd93a222b",
+ "image_prefix": "vm-aton-",
+ "attribution": "Aids to navigation: U.S. Coast Guard Light List and Local Notice to Mariners (NAVCEN)",
+ "sources": {
+  "vm-aton": {
+   "type": "vector",
+   "url": "{base}/aton.json",
+   "minzoom": 6,
+   "maxzoom": 14,
+   "attribution": "Aids to navigation: U.S. Coast Guard Light List and Local Notice to Mariners (NAVCEN)"
+  },
+  "vm-aton-text": {
+   "type": "vector",
+   "url": "{base}/aton.json",
+   "minzoom": 6,
+   "maxzoom": 14
+  }
+ },
+ "layers": [
+  {
+   "id": "vm-aton-status",
+   "type": "symbol",
+   "source": "vm-aton",
+   "source-layer": "aton",
+   "minzoom": 6,
+   "filter": [
+    "has",
+    "status"
+   ],
+   "layout": {
+    "icon-image": [
+     "concat",
+     "vm-aton-badge-",
+     [
+      "get",
+      "status"
+     ]
+    ],
+    "icon-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     6,
+     0.5,
+     9,
+     0.6,
+     11,
+     0.72,
+     13,
+     0.9,
+     14,
+     1.05,
+     16,
+     1.3
+    ],
+    "icon-allow-overlap": true,
+    "icon-ignore-placement": true,
+    "icon-anchor": "center",
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ]
+   },
+   "paint": {}
+  },
+  {
+   "id": "vm-aton-symbols",
+   "type": "symbol",
+   "source": "vm-aton",
+   "source-layer": "aton",
+   "minzoom": 6,
+   "layout": {
+    "icon-image": [
+     "concat",
+     "vm-aton-",
+     [
+      "get",
+      "sym"
+     ]
+    ],
+    "icon-size": [
+     "interpolate",
+     [
+      "linear"
+     ],
+     [
+      "zoom"
+     ],
+     6,
+     0.5,
+     9,
+     0.6,
+     11,
+     0.72,
+     13,
+     0.9,
+     14,
+     1.05,
+     16,
+     1.3
+    ],
+    "icon-allow-overlap": true,
+    "icon-ignore-placement": true,
+    "icon-anchor": "center",
+    "symbol-sort-key": [
+     "get",
+     "rank"
+    ]
+   },
+   "paint": {
+    "icon-opacity": [
+     "case",
+     [
+      "==",
+      [
+       "get",
+       "status"
+      ],
+      "missing"
+     ],
+     0.5,
+     1
+    ]
+   }
+  },
+  {
+   "id": "vm-aton-labels",
+   "type": "symbol",
+   "source": "vm-aton-text",
+   "source-layer": "aton",
+   "minzoom": 14,
+   "filter": [
+    "has",
+    "label"
+   ],
+   "layout": {
+    "text-field": [
+     "get",
+     "label"
+    ],
+    "text-font": [
+     "Noto Sans Regular"
+    ],
+    "text-size": 11,
+    "text-anchor": "left",
+    "text-offset": [
+     1.1,
+     0
+    ],
+    "text-justify": "left",
+    "text-max-width": 12,
+    "text-padding": 1,
+    "text-allow-overlap": false,
+    "symbol-sort-key": [
+     "-",
+     0,
+     [
+      "get",
+      "rank"
+     ]
+    ]
+   },
+   "paint": {
+    "text-color": [
+     "case",
+     [
+      "has",
+      "status"
+     ],
+     "#9b1c1c",
+     "#1b2733"
+    ],
+    "text-halo-color": "rgba(255,255,255,0.92)",
+    "text-halo-width": 1.3
+   }
+  }
+ ]
+}

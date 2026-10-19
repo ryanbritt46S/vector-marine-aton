@@ -1,0 +1,33 @@
+{
+  "_doc": "Settings for the daily Buoys & lights job (pipeline/run_aton.py). docs/DATA.md explains each source.",
+  "base_url": "https://navcen.uscg.gov/sites/default/files/msi/",
+  "districts": [1, 5, 7],
+  "district_names": {
+    "1": "First District: Maine to northern New Jersey, Lake Champlain",
+    "5": "Fifth District: New Jersey to North Carolina",
+    "7": "Seventh District: South Carolina to Florida, Puerto Rico, US Virgin Islands"
+  },
+  "light_list_max_parts": 40,
+  "notice_products": ["discFedAid_", "discPriAid_", "tmpChange_"],
+  "corrected_products": ["discFedAidCor_", "discPriAidCor_", "tmpChangeCor_"],
+  "shrink_ratio": 0.8,
+  "min_aids_per_district": 3000,
+  "name_match_m": 300,
+  "major_range_nm": 10,
+  "sea_buoy_range_nm": 6,
+  "zoom": {
+    "min": 6,
+    "max": 14,
+    "major": 6,
+    "sea": 8,
+    "lighted": 9,
+    "all": 11,
+    "cell_px": {"6": 32, "7": 32, "8": 24, "9": 24, "10": 20}
+  },
+  "label_minzoom": 14,
+  "stale_after_hours": 72,
+  "timezone": "America/New_York",
+  "font": "Noto Sans Regular",
+  "attribution": "Aids to navigation: U.S. Coast Guard Light List and Local Notice to Mariners (NAVCEN)",
+  "note": "Not for navigation. Positions and lights are as the Coast Guard lists them; buoys move, and the Local Notice to Mariners may be newer than this layer."
+}

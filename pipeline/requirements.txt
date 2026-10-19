@@ -1,0 +1,9 @@
+# The daily job (GitHub Actions installs these; locally local.sh makes .venv and installs them). Pure Python wheels:
+# no GDAL, no tippecanoe.
+-c constraints.txt
+pillow>=10.0                 # the symbols (PNG at 1x/2x/3x)
+mapbox-vector-tile>=2.1      # MVT encoding (brings protobuf, shapely, pyclipper)
+pmtiles>=3.4                 # the PMTiles writer and reader
+requests>=2.31               # NAVCEN downloads
+boto3>=1.34                  # read the last meta.json and upload to Cloudflare R2 (S3 API)
+pytest>=8.0

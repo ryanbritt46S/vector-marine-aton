@@ -1,0 +1,13 @@
+# Exact versions for the job, the tests and the generated fixtures (pip install -r requirements*.txt uses these).
+# The fixtures (flutter/vm_aton/test/fixtures/, worker/test/fixtures/) are made by the job's own code: another
+# mapbox-vector-tile, pmtiles or Pillow can change their bytes, and CI then reports them as out of date. Upgrade on
+# purpose: change a version here, run bash check.sh, commit the fixtures it rewrites.
+pillow==12.2.0
+mapbox-vector-tile==2.2.0
+pmtiles==3.8.1
+protobuf==6.33.6
+shapely==2.1.2
+pyclipper==1.4.0
+requests==2.33.1
+boto3==1.43.114
+pytest==9.1.1

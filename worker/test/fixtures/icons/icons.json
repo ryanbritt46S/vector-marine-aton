@@ -1,0 +1,517 @@
+{
+ "version": "c57dd93a222b",
+ "size": 48,
+ "anchor": "center",
+ "pixel_ratios": [
+  1,
+  2,
+  3
+ ],
+ "prefix": "vm-aton-",
+ "icons": {
+  "can-g": {
+   "title": "Green can (lateral, keep on your left returning from sea)",
+   "files": {
+    "1": "icons/can-g.png",
+    "2": "icons/can-g@2x.png",
+    "3": "icons/can-g@3x.png"
+   }
+  },
+  "can-r": {
+   "title": "Red can",
+   "files": {
+    "1": "icons/can-r.png",
+    "2": "icons/can-r@2x.png",
+    "3": "icons/can-r@3x.png"
+   }
+  },
+  "can-y": {
+   "title": "Yellow can (special purpose)",
+   "files": {
+    "1": "icons/can-y.png",
+    "2": "icons/can-y@2x.png",
+    "3": "icons/can-y@3x.png"
+   }
+  },
+  "can-w": {
+   "title": "White can",
+   "files": {
+    "1": "icons/can-w.png",
+    "2": "icons/can-w@2x.png",
+    "3": "icons/can-w@3x.png"
+   }
+  },
+  "nun-r": {
+   "title": "Red nun (lateral, keep on your right returning from sea)",
+   "files": {
+    "1": "icons/nun-r.png",
+    "2": "icons/nun-r@2x.png",
+    "3": "icons/nun-r@3x.png"
+   }
+  },
+  "nun-g": {
+   "title": "Green nun",
+   "files": {
+    "1": "icons/nun-g.png",
+    "2": "icons/nun-g@2x.png",
+    "3": "icons/nun-g@3x.png"
+   }
+  },
+  "nun-y": {
+   "title": "Yellow nun (special purpose)",
+   "files": {
+    "1": "icons/nun-y.png",
+    "2": "icons/nun-y@2x.png",
+    "3": "icons/nun-y@3x.png"
+   }
+  },
+  "can-grg": {
+   "title": "Preferred channel can, green-red-green",
+   "files": {
+    "1": "icons/can-grg.png",
+    "2": "icons/can-grg@2x.png",
+    "3": "icons/can-grg@3x.png"
+   }
+  },
+  "nun-rgr": {
+   "title": "Preferred channel nun, red-green-red",
+   "files": {
+    "1": "icons/nun-rgr.png",
+    "2": "icons/nun-rgr@2x.png",
+    "3": "icons/nun-rgr@3x.png"
+   }
+  },
+  "sphere-rw": {
+   "title": "Safe water sphere, red and white",
+   "files": {
+    "1": "icons/sphere-rw.png",
+    "2": "icons/sphere-rw@2x.png",
+    "3": "icons/sphere-rw@3x.png"
+   }
+  },
+  "sphere-y": {
+   "title": "Yellow sphere (special purpose)",
+   "files": {
+    "1": "icons/sphere-y.png",
+    "2": "icons/sphere-y@2x.png",
+    "3": "icons/sphere-y@3x.png"
+   }
+  },
+  "pillar-rw": {
+   "title": "Safe water buoy, red and white stripes",
+   "files": {
+    "1": "icons/pillar-rw.png",
+    "2": "icons/pillar-rw@2x.png",
+    "3": "icons/pillar-rw@3x.png"
+   }
+  },
+  "pillar-brb": {
+   "title": "Isolated danger buoy, black-red-black",
+   "files": {
+    "1": "icons/pillar-brb.png",
+    "2": "icons/pillar-brb@2x.png",
+    "3": "icons/pillar-brb@3x.png"
+   }
+  },
+  "reg-danger": {
+   "title": "Regulatory buoy: danger (orange diamond)",
+   "files": {
+    "1": "icons/reg-danger.png",
+    "2": "icons/reg-danger@2x.png",
+    "3": "icons/reg-danger@3x.png"
+   }
+  },
+  "reg-control": {
+   "title": "Regulatory buoy: controlled area (orange circle)",
+   "files": {
+    "1": "icons/reg-control.png",
+    "2": "icons/reg-control@2x.png",
+    "3": "icons/reg-control@3x.png"
+   }
+  },
+  "reg-info": {
+   "title": "Regulatory buoy: information (orange square)",
+   "files": {
+    "1": "icons/reg-info.png",
+    "2": "icons/reg-info@2x.png",
+    "3": "icons/reg-info@3x.png"
+   }
+  },
+  "reg-exclusion": {
+   "title": "Regulatory buoy: keep out (orange diamond with a cross)",
+   "files": {
+    "1": "icons/reg-exclusion.png",
+    "2": "icons/reg-exclusion@2x.png",
+    "3": "icons/reg-exclusion@3x.png"
+   }
+  },
+  "reg-plain": {
+   "title": "Regulatory buoy, white and orange",
+   "files": {
+    "1": "icons/reg-plain.png",
+    "2": "icons/reg-plain@2x.png",
+    "3": "icons/reg-plain@3x.png"
+   }
+  },
+  "mooring": {
+   "title": "Mooring buoy, white with a blue band",
+   "files": {
+    "1": "icons/mooring.png",
+    "2": "icons/mooring@2x.png",
+    "3": "icons/mooring@3x.png"
+   }
+  },
+  "buoy-other": {
+   "title": "Buoy",
+   "files": {
+    "1": "icons/buoy-other.png",
+    "2": "icons/buoy-other@2x.png",
+    "3": "icons/buoy-other@3x.png"
+   }
+  },
+  "lb-g": {
+   "title": "Green lighted buoy",
+   "files": {
+    "1": "icons/lb-g.png",
+    "2": "icons/lb-g@2x.png",
+    "3": "icons/lb-g@3x.png"
+   }
+  },
+  "lb-r": {
+   "title": "Red lighted buoy",
+   "files": {
+    "1": "icons/lb-r.png",
+    "2": "icons/lb-r@2x.png",
+    "3": "icons/lb-r@3x.png"
+   }
+  },
+  "lb-y": {
+   "title": "Yellow lighted buoy (special purpose)",
+   "files": {
+    "1": "icons/lb-y.png",
+    "2": "icons/lb-y@2x.png",
+    "3": "icons/lb-y@3x.png"
+   }
+  },
+  "lb-w": {
+   "title": "White lighted buoy",
+   "files": {
+    "1": "icons/lb-w.png",
+    "2": "icons/lb-w@2x.png",
+    "3": "icons/lb-w@3x.png"
+   }
+  },
+  "lb-rw": {
+   "title": "Safe water lighted buoy, red and white",
+   "files": {
+    "1": "icons/lb-rw.png",
+    "2": "icons/lb-rw@2x.png",
+    "3": "icons/lb-rw@3x.png"
+   }
+  },
+  "lb-rgr": {
+   "title": "Preferred channel lighted buoy, red-green-red",
+   "files": {
+    "1": "icons/lb-rgr.png",
+    "2": "icons/lb-rgr@2x.png",
+    "3": "icons/lb-rgr@3x.png"
+   }
+  },
+  "lb-grg": {
+   "title": "Preferred channel lighted buoy, green-red-green",
+   "files": {
+    "1": "icons/lb-grg.png",
+    "2": "icons/lb-grg@2x.png",
+    "3": "icons/lb-grg@3x.png"
+   }
+  },
+  "lb-brb": {
+   "title": "Isolated danger lighted buoy, black-red-black",
+   "files": {
+    "1": "icons/lb-brb.png",
+    "2": "icons/lb-brb@2x.png",
+    "3": "icons/lb-brb@3x.png"
+   }
+  },
+  "lb-wo": {
+   "title": "Regulatory lighted buoy, white and orange",
+   "files": {
+    "1": "icons/lb-wo.png",
+    "2": "icons/lb-wo@2x.png",
+    "3": "icons/lb-wo@3x.png"
+   }
+  },
+  "lb-other": {
+   "title": "Lighted buoy",
+   "files": {
+    "1": "icons/lb-other.png",
+    "2": "icons/lb-other@2x.png",
+    "3": "icons/lb-other@3x.png"
+   }
+  },
+  "db-sq-g": {
+   "title": "Green square daybeacon (SG)",
+   "files": {
+    "1": "icons/db-sq-g.png",
+    "2": "icons/db-sq-g@2x.png",
+    "3": "icons/db-sq-g@3x.png"
+   }
+  },
+  "db-sq-r": {
+   "title": "Red square daybeacon",
+   "files": {
+    "1": "icons/db-sq-r.png",
+    "2": "icons/db-sq-r@2x.png",
+    "3": "icons/db-sq-r@3x.png"
+   }
+  },
+  "db-sq-y": {
+   "title": "Yellow square daybeacon",
+   "files": {
+    "1": "icons/db-sq-y.png",
+    "2": "icons/db-sq-y@2x.png",
+    "3": "icons/db-sq-y@3x.png"
+   }
+  },
+  "db-sq-w": {
+   "title": "White square daybeacon",
+   "files": {
+    "1": "icons/db-sq-w.png",
+    "2": "icons/db-sq-w@2x.png",
+    "3": "icons/db-sq-w@3x.png"
+   }
+  },
+  "db-tri-r": {
+   "title": "Red triangle daybeacon (TR)",
+   "files": {
+    "1": "icons/db-tri-r.png",
+    "2": "icons/db-tri-r@2x.png",
+    "3": "icons/db-tri-r@3x.png"
+   }
+  },
+  "db-tri-g": {
+   "title": "Green triangle daybeacon",
+   "files": {
+    "1": "icons/db-tri-g.png",
+    "2": "icons/db-tri-g@2x.png",
+    "3": "icons/db-tri-g@3x.png"
+   }
+  },
+  "db-tri-y": {
+   "title": "Yellow triangle daybeacon",
+   "files": {
+    "1": "icons/db-tri-y.png",
+    "2": "icons/db-tri-y@2x.png",
+    "3": "icons/db-tri-y@3x.png"
+   }
+  },
+  "db-tri-w": {
+   "title": "White triangle daybeacon",
+   "files": {
+    "1": "icons/db-tri-w.png",
+    "2": "icons/db-tri-w@2x.png",
+    "3": "icons/db-tri-w@3x.png"
+   }
+  },
+  "db-jn-g": {
+   "title": "Junction daybeacon, green square with a red band (JG)",
+   "files": {
+    "1": "icons/db-jn-g.png",
+    "2": "icons/db-jn-g@2x.png",
+    "3": "icons/db-jn-g@3x.png"
+   }
+  },
+  "db-jn-r": {
+   "title": "Junction daybeacon, red triangle with a green band (JR)",
+   "files": {
+    "1": "icons/db-jn-r.png",
+    "2": "icons/db-jn-r@2x.png",
+    "3": "icons/db-jn-r@3x.png"
+   }
+  },
+  "db-dia-w": {
+   "title": "White diamond daybeacon (no lateral meaning)",
+   "files": {
+    "1": "icons/db-dia-w.png",
+    "2": "icons/db-dia-w@2x.png",
+    "3": "icons/db-dia-w@3x.png"
+   }
+  },
+  "db-dia-r": {
+   "title": "Red and white diamond daybeacon (no lateral meaning)",
+   "files": {
+    "1": "icons/db-dia-r.png",
+    "2": "icons/db-dia-r@2x.png",
+    "3": "icons/db-dia-r@3x.png"
+   }
+  },
+  "db-dia-g": {
+   "title": "Green and white diamond daybeacon (no lateral meaning)",
+   "files": {
+    "1": "icons/db-dia-g.png",
+    "2": "icons/db-dia-g@2x.png",
+    "3": "icons/db-dia-g@3x.png"
+   }
+  },
+  "db-dia-y": {
+   "title": "Yellow diamond daybeacon (special purpose)",
+   "files": {
+    "1": "icons/db-dia-y.png",
+    "2": "icons/db-dia-y@2x.png",
+    "3": "icons/db-dia-y@3x.png"
+   }
+  },
+  "db-dia-b": {
+   "title": "Black and white diamond daybeacon (no lateral meaning)",
+   "files": {
+    "1": "icons/db-dia-b.png",
+    "2": "icons/db-dia-b@2x.png",
+    "3": "icons/db-dia-b@3x.png"
+   }
+  },
+  "db-reg": {
+   "title": "Regulatory daybeacon, white with an orange diamond",
+   "files": {
+    "1": "icons/db-reg.png",
+    "2": "icons/db-reg@2x.png",
+    "3": "icons/db-reg@3x.png"
+   }
+  },
+  "db-range": {
+   "title": "Range daybeacon",
+   "files": {
+    "1": "icons/db-range.png",
+    "2": "icons/db-range@2x.png",
+    "3": "icons/db-range@3x.png"
+   }
+  },
+  "db-rw": {
+   "title": "Safe water daybeacon, red and white",
+   "files": {
+    "1": "icons/db-rw.png",
+    "2": "icons/db-rw@2x.png",
+    "3": "icons/db-rw@3x.png"
+   }
+  },
+  "db-other": {
+   "title": "Daybeacon",
+   "files": {
+    "1": "icons/db-other.png",
+    "2": "icons/db-other@2x.png",
+    "3": "icons/db-other@3x.png"
+   }
+  },
+  "light-r": {
+   "title": "Light, red",
+   "files": {
+    "1": "icons/light-r.png",
+    "2": "icons/light-r@2x.png",
+    "3": "icons/light-r@3x.png"
+   }
+  },
+  "light-g": {
+   "title": "Light, green",
+   "files": {
+    "1": "icons/light-g.png",
+    "2": "icons/light-g@2x.png",
+    "3": "icons/light-g@3x.png"
+   }
+  },
+  "light-w": {
+   "title": "Light, white",
+   "files": {
+    "1": "icons/light-w.png",
+    "2": "icons/light-w@2x.png",
+    "3": "icons/light-w@3x.png"
+   }
+  },
+  "light-y": {
+   "title": "Light, yellow",
+   "files": {
+    "1": "icons/light-y.png",
+    "2": "icons/light-y@2x.png",
+    "3": "icons/light-y@3x.png"
+   }
+  },
+  "light-major": {
+   "title": "Major light (nominal range 10 NM or more)",
+   "files": {
+    "1": "icons/light-major.png",
+    "2": "icons/light-major@2x.png",
+    "3": "icons/light-major@3x.png"
+   }
+  },
+  "range-front": {
+   "title": "Range front light",
+   "files": {
+    "1": "icons/range-front.png",
+    "2": "icons/range-front@2x.png",
+    "3": "icons/range-front@3x.png"
+   }
+  },
+  "range-rear": {
+   "title": "Range rear light",
+   "files": {
+    "1": "icons/range-rear.png",
+    "2": "icons/range-rear@2x.png",
+    "3": "icons/range-rear@3x.png"
+   }
+  },
+  "racon": {
+   "title": "Racon (radar beacon)",
+   "files": {
+    "1": "icons/racon.png",
+    "2": "icons/racon@2x.png",
+    "3": "icons/racon@3x.png"
+   }
+  },
+  "vais": {
+   "title": "Virtual AIS aid (V-AtoN)",
+   "files": {
+    "1": "icons/vais.png",
+    "2": "icons/vais@2x.png",
+    "3": "icons/vais@3x.png"
+   }
+  },
+  "sound": {
+   "title": "Sound signal",
+   "files": {
+    "1": "icons/sound.png",
+    "2": "icons/sound@2x.png",
+    "3": "icons/sound@3x.png"
+   }
+  },
+  "other": {
+   "title": "Aid to navigation",
+   "files": {
+    "1": "icons/other.png",
+    "2": "icons/other@2x.png",
+    "3": "icons/other@3x.png"
+   }
+  },
+  "badge-missing": {
+   "title": "Missing, off station or destroyed (red ring, !)",
+   "files": {
+    "1": "icons/badge-missing.png",
+    "2": "icons/badge-missing@2x.png",
+    "3": "icons/badge-missing@3x.png"
+   }
+  },
+  "badge-fault": {
+   "title": "Light out or damaged (amber ring, !)",
+   "files": {
+    "1": "icons/badge-fault.png",
+    "2": "icons/badge-fault@2x.png",
+    "3": "icons/badge-fault@3x.png"
+   }
+  },
+  "badge-temporary": {
+   "title": "Temporary change: discontinued, relocated, replaced (grey dashed ring)",
+   "files": {
+    "1": "icons/badge-temporary.png",
+    "2": "icons/badge-temporary@2x.png",
+    "3": "icons/badge-temporary@3x.png"
+   }
+  }
+ }
+}

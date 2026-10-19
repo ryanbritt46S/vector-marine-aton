@@ -1,0 +1,36 @@
+# Runs check.sh (pipeline tests, parity fixtures, Worker tests, preview tests incl. a browser test on a SAMPLE
+# build) on every push and pull request. Out-of-date generated files fail here (CI=true).
+# The Flutter package runs in its own job. It hasn't been compiled yet (docs/IMPLEMENTATION_PLAN.md, WP1), so
+# that job doesn't block until WP1 is done: then delete `continue-on-error` below.
+name: check
+on:
+  push:
+  pull_request:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: pipeline/requirements-test.txt
+      - run: pip install -r pipeline/requirements-test.txt
+      - run: bash check.sh
+        env:
+          CHROME: /usr/bin/google-chrome
+          SKIP_FLUTTER: "1"
+  flutter:
+    runs-on: ubuntu-latest
+    continue-on-error: true          # until WP1: the package has never been compiled
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get && flutter analyze && flutter test
+        working-directory: flutter/vm_aton

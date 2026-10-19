@@ -1,0 +1,19 @@
+# vm-aton: serves Buoys & lights (US Coast Guard aids to navigation) to the app.
+# Its own Worker and bucket on purpose: nothing here can change the chart or another feature.
+name = "vm-aton"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# Custom domain (turns on Cloudflare's edge cache). vectormarine.us is already on Cloudflare.
+routes = [ { pattern = "aton.vectormarine.us", custom_domain = true } ]
+workers_dev = true
+
+[[r2_buckets]]
+binding = "ATON"
+bucket_name = "vm-aton"            # written by the GitHub Action (pipeline/publish.py), read here
+preview_bucket_name = "vm-aton"
+
+[vars]
+ALLOWED_ORIGINS = "*"             # or e.g. "https://app.vectormarine.us,http://localhost:8790"
+
+# API keys are a secret:  npx wrangler secret put API_KEYS   (use the same keys as the tiles Worker)

@@ -1,0 +1,7 @@
+# Enough to run the tests, --raw and --sample (no boto3)
+-c constraints.txt
+pillow>=10.0
+mapbox-vector-tile>=2.1
+pmtiles>=3.4
+requests>=2.31
+pytest>=8.0

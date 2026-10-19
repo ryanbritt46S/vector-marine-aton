@@ -1,0 +1,195 @@
+{
+ "version": 1,
+ "layer": "aton",
+ "sample": true,
+ "title": "Buoys & lights",
+ "generated_at": "2026-10-19T10:20:00Z",
+ "run": "20261019T1020Z",
+ "data_date": "2026-10-19",
+ "light_list_date": "2026-10-19",
+ "notices_date": "2026-10-19",
+ "stale_after_hours": 72,
+ "attribution": "Aids to navigation: U.S. Coast Guard Light List and Local Notice to Mariners (NAVCEN)",
+ "note": "Not for navigation. Positions and lights are as the Coast Guard lists them; buoys move, and the Local Notice to Mariners may be newer than this layer.",
+ "districts": {
+  "1": {
+   "name": "First District: Maine to northern New Jersey, Lake Champlain",
+   "aids": 60,
+   "light_list_parts": 1
+  },
+  "5": {
+   "name": "Fifth District: New Jersey to North Carolina",
+   "aids": 60,
+   "light_list_parts": 1
+  },
+  "7": {
+   "name": "Seventh District: South Carolina to Florida, Puerto Rico, US Virgin Islands",
+   "aids": 60,
+   "light_list_parts": 1
+  }
+ },
+ "counts": {
+  "aids": 181,
+  "listed": 180,
+  "unlisted": 1,
+  "skipped_no_position": 0,
+  "by_kind": {
+   "buoy": 60,
+   "daybeacon": 55,
+   "light": 12,
+   "lighted_buoy": 30,
+   "major_light": 3,
+   "other": 3,
+   "racon": 3,
+   "range_daybeacon": 3,
+   "range_light": 6,
+   "sound_signal": 3,
+   "virtual_ais": 3
+  },
+  "by_sym": {
+   "buoy-other": 3,
+   "can-g": 3,
+   "can-grg": 3,
+   "can-r": 3,
+   "can-w": 3,
+   "can-y": 3,
+   "db-dia-b": 3,
+   "db-dia-g": 3,
+   "db-dia-r": 3,
+   "db-dia-w": 3,
+   "db-dia-y": 3,
+   "db-jn-g": 3,
+   "db-jn-r": 3,
+   "db-other": 3,
+   "db-range": 3,
+   "db-reg": 4,
+   "db-rw": 3,
+   "db-sq-g": 3,
+   "db-sq-r": 3,
+   "db-sq-w": 3,
+   "db-sq-y": 3,
+   "db-tri-g": 3,
+   "db-tri-r": 3,
+   "db-tri-w": 3,
+   "db-tri-y": 3,
+   "lb-brb": 3,
+   "lb-g": 3,
+   "lb-grg": 3,
+   "lb-other": 3,
+   "lb-r": 3,
+   "lb-rgr": 3,
+   "lb-rw": 3,
+   "lb-w": 3,
+   "lb-wo": 3,
+   "lb-y": 3,
+   "light-g": 3,
+   "light-major": 3,
+   "light-r": 3,
+   "light-w": 3,
+   "light-y": 3,
+   "mooring": 3,
+   "nun-g": 3,
+   "nun-r": 3,
+   "nun-rgr": 3,
+   "nun-y": 3,
+   "other": 3,
+   "pillar-brb": 3,
+   "pillar-rw": 3,
+   "racon": 3,
+   "range-front": 3,
+   "range-rear": 3,
+   "reg-control": 3,
+   "reg-danger": 3,
+   "reg-exclusion": 3,
+   "reg-info": 3,
+   "reg-plain": 3,
+   "sound": 3,
+   "sphere-rw": 3,
+   "sphere-y": 3,
+   "vais": 3
+  },
+  "by_status": {
+   "missing": 3,
+   "fault": 5,
+   "temporary": 2
+  },
+  "notices": {
+   "nationwide": 12,
+   "in_area": 11,
+   "matched_by_number": 9,
+   "matched_by_name": 1,
+   "unmatched": 1,
+   "matched_far": 0,
+   "corrected_in_area": 1,
+   "parts": {
+    "discFedAid_": 1,
+    "discPriAid_": 1,
+    "tmpChange_": 1
+   }
+  }
+ },
+ "tiles": {
+  "file": "aton.pmtiles",
+  "layer": "aton",
+  "minzoom": 6,
+  "maxzoom": 14,
+  "version": "19501a87fa48",
+  "bytes": 74003,
+  "tiles": 66,
+  "bounds": [
+   -80.07,
+   25.7,
+   -73.905,
+   40.466
+  ]
+ },
+ "icons": {
+  "file": "icons/icons.json",
+  "version": "c57dd93a222b",
+  "count": 63
+ },
+ "style": "style.json",
+ "source": "SAMPLE (made up)",
+ "sources": [
+  {
+   "file": "fileIndexNew.json",
+   "bytes": 343,
+   "modified": "2026-10-19T10:20:00Z"
+  },
+  {
+   "file": "lightListD01_1.csv",
+   "bytes": 7501,
+   "modified": "2026-10-19T10:20:00Z"
+  },
+  {
+   "file": "lightListD05_1.csv",
+   "bytes": 7491,
+   "modified": "2026-10-19T10:20:00Z"
+  },
+  {
+   "file": "lightListD07_1.csv",
+   "bytes": 7495,
+   "modified": "2026-10-19T10:20:00Z"
+  },
+  {
+   "file": "discFedAid_1.geojson",
+   "bytes": 3404,
+   "modified": "2026-10-19T10:20:00Z"
+  },
+  {
+   "file": "discPriAid_1.geojson",
+   "bytes": 476,
+   "modified": "2026-10-19T10:20:00Z"
+  },
+  {
+   "file": "tmpChange_1.geojson",
+   "bytes": 1355,
+   "modified": "2026-10-19T10:20:00Z"
+  },
+  {
+   "file": "discFedAidCor_1.geojson",
+   "bytes": 468,
+   "modified": "2026-10-19T10:20:00Z"
+  }
+ ]
+}
