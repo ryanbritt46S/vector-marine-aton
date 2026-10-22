@@ -1,7 +1,8 @@
 # pipeline/: the daily Buoys & lights job
 
-Read the root `AGENTS.md` first. Python 3.10+; runs daily in GitHub Actions (`.github/workflows/aton.yml`)
-and locally through `local.sh`. No account needed (the Coast Guard's NAVCEN files are public). Pure-Python
+Read the root `AGENTS.md` first. Python 3.10+; runs daily in GitHub Actions (`.github/workflows/aton.yml`,
+building from the Worker's copy of the NAVCEN files in R2: `tools/fetch_raw.py`, then `--raw`) and locally
+through `local.sh` (downloads directly). No account needed (the Coast Guard's NAVCEN files are public). Pure-Python
 wheels only: no GDAL, no tippecanoe.
 
 ## Files
@@ -22,6 +23,7 @@ wheels only: no GDAL, no tippecanoe.
 | `vmaton/style.py` | `style.json` (sources and layers) |
 | `vmaton/build.py` | `run()`: the whole job, `meta.json`, `uploads.json` |
 | `vmaton/sample.py` | Made-up files (SAMPLE) for tests and `--sample`; `CASES` = one aid per symbol |
+| `tools/fetch_raw.py` | One day's NAVCEN copy from R2 `raw/<date>/` (written by `worker/src/mirror.js`) into a folder for `--raw`; refuses a day without `_complete.json`, checks sizes, sets each file's time to the Coast Guard's Last-Modified (the Light List's date comes from it) |
 | `tools/make_parity.py` | Writes `flutter/vm_aton/test/fixtures/` and `worker/test/fixtures/` (run by `check.sh`) |
 | `tools/make_fixture.py` | Cuts `tests/fixtures/real/` from a full download (NJ inlets, NY harbor entrance, Miami); not run by `check.sh` |
 | `tools/make_coast.py` | Optional rough land for the preview only (GSHHG via `basemap-data-hires`) |

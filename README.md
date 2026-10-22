@@ -18,7 +18,8 @@ kept current daily.
 
 Its own repo, Flutter package (`vm_aton`), Worker (`aton.vectormarine.us`) and R2 bucket (`vm-aton`): it ships
 as one feature and nothing in it can affect the chart or another overlay. Free to run: public data (USCG
-NAVCEN), GitHub Actions, Cloudflare's free tiers. Nothing about the user leaves the phone.
+NAVCEN), GitHub Actions, Cloudflare R2 and Workers (one small daily cron on the Workers Paid plan the account
+already has). Nothing about the user leaves the phone.
 
 ![Little Egg Inlet: Lighted Buoy 2 missing since Dec 2, 2025](docs/img/little-egg-inlet-card.png)
 
@@ -49,13 +50,19 @@ bash local_app.sh
 ## How it works
 
 ```
-GitHub Actions, daily 10:20 UTC (pipeline/)          R2 bucket vm-aton        Worker vm-aton              App
+Worker vm-aton cron, 10:20 UTC (retry 10:40): NAVCEN files ─► R2 raw/<date>/ (_complete.json last)
+                                                       │
+GitHub Actions, daily 10:50 UTC (pipeline/)          R2 bucket vm-aton        Worker vm-aton              App
 NAVCEN Light List (lightList{D}_{n}.csv)  ─┐         aton.pmtiles             aton.vectormarine.us        Overlays → Buoys & lights
 Local Notice to Mariners discrepancies    ├─► run_aton.py ─► icons/, style.json ─► /meta.json, /style.json ─► vm_aton package
  and temporary changes (*.geojson)        ─┘         meta.json (last)         /aton/{z}/{x}/{y}.mvt       (last copy kept on the phone)
                                           publish.py                          /icons/… (API key, edge cache)
 ```
 
+0. NAVCEN refuses GitHub's machines, so the Worker downloads: its daily cron (`worker/src/mirror.js`) copies
+   the day's files into the bucket's `raw/<date>/`, unchanged, and writes `_complete.json` only when all are
+   there. The Action copies them out (`pipeline/tools/fetch_raw.py`, which keeps the Coast Guard's dates) and
+   builds with `--raw`. A day without a complete copy isn't built; the published build stays.
 1. `pipeline/run_aton.py` downloads the Light List of districts 1, 5 and 7 (counting its parts until one isn't
    there) and the current discrepancies and temporary changes, puts each notice on its aid (Light List number,
    else the same name within 300 m; notices that match nothing are still shown, at their own position),

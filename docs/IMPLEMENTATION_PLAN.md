@@ -105,7 +105,8 @@ commands for me to run; don't run deploys or add secrets yourself.
 
 **Owner:** backend · **Needs:** WP2
 
-1. `docs/SETUP.md` step 4: the three repository secrets, then Actions → buoys-and-lights → Run workflow.
+1. `docs/SETUP.md` step 4: the three repository secrets, then Actions → buoys-and-lights → Run workflow
+   (after the Worker's first daily copy of the NAVCEN files: `docs/SETUP.md` step 3).
 2. Read the summary: aids per district (about 9,200 / 8,900 / 14,300), notices matched, statuses. Spot-check
    five aids with a status against the Local Notice to Mariners.
 
@@ -117,7 +118,8 @@ Done when:
 Kickoff prompt:
 ```text
 Read AGENTS.md, pipeline/AGENTS.md, .github/workflows/aton.yml and docs/SETUP.md. Check the workflow will work
-as written (secrets, the shrink check reading the last meta.json from R2, publish order) and tell me anything
+as written (secrets, the Worker's raw/ copy and fetch_raw.py, the shrink check reading the last meta.json from
+R2, publish order) and tell me anything
 that looks wrong before I run it. Then help me read the first run's summary.
 ```
 

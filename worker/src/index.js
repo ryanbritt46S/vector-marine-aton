@@ -12,6 +12,8 @@
  *
  * The files are written by the GitHub Action (pipeline/), not by this Worker: it only checks the API key, reads
  * tiles out of the archive and hands files out, so a failed data job never breaks the map (the last build stays).
+ * scheduled() (Cron Trigger, wrangler.toml) copies the Coast Guard's files into raw/<date>/ for that Action,
+ * because NAVCEN refuses GitHub's machines: src/mirror.js. raw/ has no route; nothing of it is served.
  * Its own Worker and bucket: nothing here can touch the chart (bathy-tiles) or other overlays.
  * PUBLIC_URL (optional var): the address to put in style.json and aton.json; default: the request's own
  * (wrangler dev rewrites that to the custom domain, so dev_local.sh sets it to http://localhost:<port>).
@@ -20,6 +22,7 @@
  * (local testing only).
  */
 import { PMTiles } from "pmtiles";
+import { mirror, realDeps } from "./mirror.js";
 
 const JSON_T = "application/json; charset=utf-8";
 const MVT_T = "application/x-protobuf";
@@ -56,6 +59,12 @@ async function reader(env) {
 }
 
 export default {
+  /** Cron Trigger: today's copy of the NAVCEN files (src/mirror.js). A throw marks the run failed in the logs. */
+  async scheduled(event, env, ctx) {
+    const r = await mirror(env, event.scheduledTime, realDeps);
+    console.log(JSON.stringify(r.skipped ? r : { dir: r.dir, files: r.files.length, light_list_parts: r.light_list_parts,
+                                                 notice_parts: r.notice_parts }));
+  },
   async fetch(req, env, ctx) {
     const url = new URL(req.url);
     const cors = corsHeaders(req, env);

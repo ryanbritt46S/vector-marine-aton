@@ -24,7 +24,8 @@ Nothing is deployed. That's the team's work: `docs/IMPLEMENTATION_PLAN.md`.
 
 ```
 pipeline/          daily job (Python): run_aton.py, publish.py, vmaton/, config/, tests/, tools/
-worker/            Cloudflare Worker "vm-aton": tiles from aton.pmtiles in R2, API keys, edge cache
+worker/            Cloudflare Worker "vm-aton": tiles from aton.pmtiles in R2, API keys, edge cache; the daily
+                   NAVCEN copy into R2 raw/ (cron, src/mirror.js)
 flutter/vm_aton/   Flutter package: AtonController, AtonMapLibre, AtonCard, AtonNote (+ example/)
 preview/           the overlay as a web page on the real files; aton.js = the words in JS
 docs/              IMPLEMENTATION_PLAN, SPEC, API, DATA, SETUP, RUNBOOK, QA_CHECKLIST, ai/APP_REPO_CONTEXT, img/
@@ -56,8 +57,10 @@ check.sh           every check;  local.sh: everything locally;  local_app.sh: th
    logging of what's tapped. The only requests are meta/style/icons and map tiles.
 9. **Credit the source** where the layer is shown: `meta.json` `attribution` ("Aids to navigation: U.S. Coast
    Guard Light List and Local Notice to Mariners (NAVCEN)").
-10. **Free-tier budget.** The Worker only reads tiles and files (Workers Free: ~10 ms CPU per request). R2
-    ~15 MB. GitHub Actions a minute a day. Don't add paid services without checking this.
+10. **Budget.** The Worker's requests only read tiles and files; its one daily cron copies ~45 NAVCEN files
+    (Workers Paid, already on the account: 1,000 subrequests and 30 s CPU per run). R2: ~15 MB published plus
+    ~15 MB a day in `raw/`, deleted after 30 days by a lifecycle rule (~0.5 GB). GitHub Actions a minute a
+    day. Don't add paid services without checking this.
 11. **Stay out of the chart.** Overlays only, under the style's `vm-overlays` anchor (and under the weather
     overlays); never change the bathymetry tiles, relief, contours, palettes or map styles. No new map
     buttons: the switch lives in the app's Overlays menu.
@@ -110,6 +113,7 @@ From the repo root. These blocks have no `#` comments so they paste cleanly into
 | Map drawing in the app | `flutter/vm_aton/lib/src/maplibre.dart` | example app on a device, QA checklist |
 | The card and the note line | `flutter/vm_aton/lib/src/widgets.dart` | widget tests; keep the preview in step |
 | Schedule, secrets of the job | `.github/workflows/aton.yml`, `docs/SETUP.md` | run it by hand once |
+| The daily NAVCEN copy (times, files) | `worker/src/mirror.js`, `worker/wrangler.toml` crons, `pipeline/tools/fetch_raw.py` | `worker/test/mirror.test.mjs`, `pipeline/tests/test_fetch_raw.py`; deploy the Worker |
 
 ## Glossary
 
@@ -130,8 +134,10 @@ From the repo root. These blocks have no `#` comments so they paste cleanly into
 
 - The Flutter package hasn't been compiled or run (work package 1); three maplibre_gl details to check first
   are in `flutter/vm_aton/AGENTS.md`.
-- The daily job's download from NAVCEN couldn't be tried from where this was written (no internet there); the
-  files' format was checked on copies downloaded on Oct 19, 2026.
+- NAVCEN refuses GitHub's machines (HTTP 403, Oct 19, 2026) but answers a Cloudflare Worker (200, tested
+  Oct 2026). So the Worker copies the files into R2 (`worker/src/mirror.js`) and the Action builds from that copy
+  (`pipeline/tools/fetch_raw.py`, then `run_aton.py --raw`). If NAVCEN ever refuses Cloudflare too: a
+  self-hosted GitHub runner, `runs-on: self-hosted`, and the plain download (drop the fetch step and `--raw`).
 - Western Rivers (`buoys_*.geojson`) and other districts are not included.
 - If the map's fonts can't load (offline, nothing cached), the labels disappear; the symbols and rings don't
   (they're on their own source).

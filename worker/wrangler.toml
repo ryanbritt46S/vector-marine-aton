@@ -13,6 +13,12 @@ binding = "ATON"
 bucket_name = "vm-aton"            # written by the GitHub Action (pipeline/publish.py), read here
 preview_bucket_name = "vm-aton"
 
+# The daily copy of the Coast Guard's files into raw/<date>/ (src/mirror.js), for the GitHub Action to build from
+# (NAVCEN refuses GitHub's machines, answers Cloudflare's). 10:40 is a retry: it does nothing if 10:20 completed.
+# The Action (.github/workflows/aton.yml) runs at 10:50 UTC.
+[triggers]
+crons = ["20 10 * * *", "40 10 * * *"]
+
 [vars]
 ALLOWED_ORIGINS = "*"             # or e.g. "https://app.vectormarine.us,http://localhost:8790"
 

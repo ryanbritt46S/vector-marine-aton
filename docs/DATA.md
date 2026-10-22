@@ -99,7 +99,8 @@ Light List on Oct 19, 2026 (9,218 / 8,880 / 14,323), plus 24 aids only a notice 
 
 ## Update cadence
 
-The job runs daily at 10:20 UTC (6:20 AM New York in summer). The notices change every day; the Light List
+The files are copied at 10:20 UTC by the Worker (retry 10:40) and the job builds at 10:50 UTC (6:50 AM New York
+in summer). The notices change every day; the Light List
 weekly. `meta.json` gives the data's date (`data_date`) and when the job ran (`generated_at`); the app says
 "Coast Guard data not updated for N days" after 72 hours without a run, and keeps showing the last build.
 

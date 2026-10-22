@@ -22,6 +22,9 @@ In the Cloudflare dashboard (same account as `tiles.vectormarine.us`):
 2. **R2 → Manage R2 API Tokens → Create API token**: permissions **Object Read & Write**, bucket **vm-aton**
    only. Note the **Access Key ID**, the **Secret Access Key** (shown once) and your **Account ID** (R2 overview
    page). They're for GitHub in step 4.
+3. **R2 → vm-aton → Settings → Object lifecycle rules → Add rule**: name `expire-raw`, prefix **`raw/`**,
+   delete objects **30 days** after upload. That's the Worker's daily copy of the NAVCEN files (~15 MB a day);
+   nothing else in the bucket has that prefix.
 
 ## 3. The Worker
 
@@ -33,7 +36,10 @@ npx wrangler deploy
 ```
 
 That creates `vm-aton`, bound to the bucket, on `https://aton.vectormarine.us` (the custom domain in
-`wrangler.toml`; vectormarine.us is already on Cloudflare) and `https://vm-aton.<subdomain>.workers.dev`.
+`wrangler.toml`; vectormarine.us is already on Cloudflare) and `https://vm-aton.<subdomain>.workers.dev`, and
+its two Cron Triggers (10:20 and 10:40 UTC): the daily copy of the NAVCEN files into `raw/`, which the job in
+step 4 builds from (NAVCEN refuses GitHub's machines). Cron Triggers need no extra setting; the account is on
+Workers Paid. They show under Workers & Pages → vm-aton → Settings → Triggers.
 
 API keys: the same keys as the tiles Worker. `api_keys.sh` keeps them in
 `~/.config/vectormarine/bathy_api_keys` (one `label:key` per line); send the same list here:
@@ -65,16 +71,17 @@ curl -s -o /dev/null -w '%{http_code}\n' "https://aton.vectormarine.us/meta.json
 | `R2_ACCESS_KEY_ID` | from step 2 |
 | `R2_SECRET_ACCESS_KEY` | from step 2 |
 
-3. **Actions → buoys-and-lights → Run workflow**. The run's summary lists the aids per district, the notices
-   and how they matched.
+3. **Actions → buoys-and-lights → Run workflow**, after the Worker's first copy (10:20 UTC the day after step 3,
+   or later that day; until then the first step says `no complete NAVCEN download`). The run's summary lists the
+   aids per district, the notices and how they matched.
 4. Check:
 
 ```bash
 curl -s "https://aton.vectormarine.us/meta.json?key=YOUR_KEY" | head -c 400
 ```
 
-From then on it runs daily at 10:20 UTC (6:20 AM New York in summer). GitHub emails failures to whoever last
-changed `.github/workflows/aton.yml`.
+From then on it runs daily at 10:50 UTC (6:50 AM New York in summer), after the Worker's copy. GitHub emails
+failures to whoever last changed `.github/workflows/aton.yml`; the Worker's own errors are in its Logs.
 
 ## 5. See it on the live data
 

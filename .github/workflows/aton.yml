@@ -2,14 +2,23 @@
 # and temporary changes from the Local Notice to Mariners (NAVCEN, public, no key) -> vector tiles, symbols,
 # style and meta in the vm-aton R2 bucket, which the vm-aton Worker serves to the app. About a minute.
 #
+# NAVCEN refuses GitHub's machines (HTTP 403, Oct 19, 2026), so this job doesn't download from it. The vm-aton
+# Worker copies the day's files into the bucket at 10:20 UTC (retry 10:40; worker/src/mirror.js) and this job
+# builds from that copy: tools/fetch_raw.py refuses a day without raw/<date>/_complete.json.
+#
 # Repository secrets (Settings -> Secrets and variables -> Actions), see docs/SETUP.md:
 #   R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY  R2 token with Object Read & Write on vm-aton only
 # Run it by hand: Actions -> buoys-and-lights -> Run workflow. A failed run emails whoever last edited this file.
 name: buoys-and-lights
 on:
   schedule:
-    - cron: "20 10 * * *"          # 6:20 AM New York (summer): NAVCEN posts the day's notices overnight
+    - cron: "50 10 * * *"          # 6:50 AM New York (summer): after the Worker's copy (10:20, retry 10:40)
   workflow_dispatch:
+    inputs:
+      date:
+        description: "Build from the copy of this day (YYYY-MM-DD, UTC). Empty = today."
+        required: false
+        default: ""
 concurrency:
   group: buoys-and-lights
   cancel-in-progress: false
@@ -29,10 +38,16 @@ jobs:
           cache: pip
           cache-dependency-path: pipeline/requirements.txt
       - run: pip install -r pipeline/requirements.txt
-      # Downloads the files (~15 MB), reads the last published meta.json from R2 (a district with far fewer aids
-      # than that stops the run: exit 3, nothing published), writes build/site.
+      # The Worker's copy of the NAVCEN files (~15 MB), with the Coast Guard's dates. Fails (exit 2) when the
+      # day's copy isn't complete: see docs/RUNBOOK.md.
+      - name: Get today's NAVCEN copies
+        env:
+          DAY: ${{ inputs.date }}
+        run: python3 pipeline/tools/fetch_raw.py --out raw ${DAY:+--date "$DAY"}
+      # Reads the last published meta.json from R2 (a district with far fewer aids than that stops the run:
+      # exit 3, nothing published), writes build/site.
       - name: Build
-        run: python3 pipeline/run_aton.py --out build/site
+        run: python3 pipeline/run_aton.py --raw raw --out build/site
       - name: Publish to R2
         run: python3 pipeline/publish.py --src build/site
       - name: Summary
